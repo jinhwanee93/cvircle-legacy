@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarHeader, Nav } from 'react-bootstrap';
+import { Navbar, NavbarHeader, FormGroup, FormControl, Button, Nav } from 'react-bootstrap';
 import { Image } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
@@ -13,13 +13,23 @@ const NavBar = ({ isAuthenticated, onLoginClick, onLogoutClick }) =>
           <Image className="cvrcle-logo-icon" src='./images/cvrcle-logo-icon.png' />
         </Link>
       </Navbar.Header>
+      <Navbar.Collapse>
+        <Navbar.Form pullLeft>
+          <FormGroup>
+            <FormControl type="text" placeholder="Search" />
+          </FormGroup>
+          {' '}
+          <Button type="submit">Submit</Button>
+        </Navbar.Form>
+      </Navbar.Collapse>
       <Nav>
-        { !isAuthenticated ? 
-        (<button onClick={onLoginClick} className="navbar-links">Login</button>) : 
-        (<button onClick={onLogoutClick} className="navbar-links">Logout</button> )}
+        {!isAuthenticated ?
+          (<button onClick={onLoginClick} className="navbar-links">Login</button>) :
+          (<button onClick={onLogoutClick} className="navbar-links">Logout</button>)}
+
       </Nav>
     </Navbar>
-  </div>
+  </div >
 
 NavBar.propTypes = {
   isAuthenticated: React.PropTypes.bool.isRequired,

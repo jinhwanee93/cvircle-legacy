@@ -31,7 +31,7 @@ module.exports = (app) => {
               fbID: data.fbID,
               firstName: data.firstName,
               lastName: data.lastName,
-              email: 'fakeemail@something.com',
+              email: 'fakeemail@something.com', // to do: remove email from schema - not available in FB profile
             })
             .then((user) => { 
               console.log("success", user);
@@ -79,11 +79,15 @@ module.exports = (app) => {
       lat: flat,
       lng: flng
     }
+    console.log(formattedEntry);
     Entry
       .query()
       .insertAndFetch(formattedEntry)
       .then((entry) => { res.send(entry) })
-      .catch(next);
+      .catch((err) => {
+        console.log(err)
+        next(err);
+      });
   })
 
   app.delete('/entries', (req, res, next) => {

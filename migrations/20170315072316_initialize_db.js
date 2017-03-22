@@ -25,7 +25,7 @@ exports.up = function(knex, Promise) {
       table.decimal('lat', 24, 12);
       table.decimal('lng', 24, 12);
       table.string('name', 255);
-      table.string('address', 80);
+      table.string('address', 255);
       table.integer('contributorID').unsigned().references('id').inTable('users').onDelete('CASCADE');
       table.integer('itinID').unsigned().references('id').inTable('itineraries').onDelete('CASCADE');
       table.timestamps(true);

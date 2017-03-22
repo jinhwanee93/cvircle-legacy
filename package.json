@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./server/server.js",
     "dev": "webpack-dashboard webpack-dev-server --progress --colors",
-    "build": "webpack"
+    "build": "webpack --watch --progress"
   },
   "repository": {
     "type": "git",

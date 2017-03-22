@@ -26,8 +26,12 @@ class ContributorEntry extends Component {
   componentDidMount() {
     this.updateState();
     if (this.props.isAuthenticated) {
-      let fbID = this.props.profile.third_party_id;
-      axios.get(`http://localhost:3000/users?fbID=${fbID}`)
+      var userdata = {
+        firstName: this.props.profile.given_name,
+        lastName: this.props.profile.family_name,
+        fbID: this.props.profile.third_party_id,
+      }
+      axios.get(`http://localhost:3000/users`, {params : {userdata} })
         .then((res) => {
           let tmp = res.data[0]["id"]
           this.setState({

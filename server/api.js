@@ -84,7 +84,6 @@ module.exports = (app) => {
     Entry
       .query()
       .insertAndFetch(formattedEntry)
-      console.log("asdfasdf", formattedEntry)
       .then((entry) => { res.send(entry) })
       .catch((err) => {
         console.log(err)

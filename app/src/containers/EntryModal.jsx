@@ -46,9 +46,8 @@ class EntryModal extends Component {
 
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      let fbID = this.props.profile.user_id
-      let id = fbID.split('|')
-      axios.get(`http://localhost:3000/users?fbID=${id[1]}`)
+      let fbID = this.props.profile.third_party_id
+      axios.get(`http://localhost:3000/users?fbID=${fbID}`)
         .then((res) => {
           let tmp = res.data[0]["id"]
           this.setState({

@@ -30,13 +30,17 @@ class HomePage extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.newItinAdded = this.newItinAdded.bind(this)
   }
-
+  //"MAmIuMj8NAdTWtyY6d-ymtYsnLw"
   // gets owwner id information from redux store, then grabs list of itineraries from the database
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.isAuthenticated) {
-      let fbID = this.props.profile.user_id
-      let id = fbID.split('|')
-      axios.get(`http://localhost:3000/users?fbID=${id[1]}`)
+      let id = this.props.profile.third_party_id
+      var userdata = {
+        firstName: this.props.profile.given_name,
+        lastName: this.props.profile.family_name,
+        fbID: this.props.profile.third_party_id,
+      }
+      axios.get(`http://localhost:3000/users`, {params : {userdata} })
         .then((res) => {
           let tmp = res.data[0]["id"]
           this.setState({
@@ -53,6 +57,7 @@ class HomePage extends Component {
   }
 
   getUserItineraries() {
+    console.log(this.state.oid);
     axios.get(`http://localhost:3000/itineraries?ownerID=${this.state.oid}`)
       .then((res) => this.setState({ itins: res.data }))
       .catch(err => console.log(err))

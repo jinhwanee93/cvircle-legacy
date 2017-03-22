@@ -7,10 +7,9 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      host: process.env.MYSQL_URI,
-      database: process.env.MYSQL_DEV_DB,
-      user: process.env.MYSQL_MASTER_USER,
-      password: process.env.MYSQL_MASTER_PASS
+      host: '127.0.0.1',
+      database: 'cvircle',
+      user: 'root',
     },
     pool: {
       min: 1,
@@ -24,7 +23,7 @@ module.exports = {
       user: 'username',
       password: 'password'
     },
-    pool: {
+    pool: { 
       min: 5,
       max: 20
     },

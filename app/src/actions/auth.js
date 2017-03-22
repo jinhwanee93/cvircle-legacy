@@ -11,7 +11,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 // AUTH0_DOMAIN=cvrcle.auth0.com
 
 
-const authService = new AuthService('qpfelAKW1EAzyb3RI3pk46SD0deXrJhE', 'cvrcle.auth0.com')
+const authService = new AuthService('qs5HxWaqQML5N0AckWPuigC490f0R0Q3', 'yangemilym.auth0.com')
 
 // Listen to authenticated event from AuthService and get the profile of the user
 // Done on every page startup

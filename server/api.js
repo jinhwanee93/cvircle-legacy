@@ -16,17 +16,33 @@ const Entry = require('./models/Entry');
 
 module.exports = (app) => {
   app.get('/users', (req, res, next) => {
+    var data = JSON.parse(req.query.userdata)
     User
       .query()
       .allowEager('[itineraries, entries]')
       .eager(req.query.eager)
-      .skipUndefined()
-      .where('firstName', req.query.firstName)
-      .where('lastName', req.query.lastName)
-      .where('fbID', req.query.fbID)
-      .where('id', req.query.id)
-      .then((users) => { res.send(users); })
-      .catch(next);
+      // .skipUndefined()
+      .where('fbID', data.fbID)
+      .then((users) => { 
+        if (users.length === 0) {
+            User
+            .query()
+            .insertAndFetch({
+              fbID: data.fbID,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              email: 'fakeemail@something.com',
+            })
+            .then((user) => { 
+              console.log("success", user);
+              res.send(user) })
+            .catch((err) => {
+              console.log("err", err)
+            })
+        } else {
+        res.send(users);
+      }})
+      .catch(next)
   })
 
   app.post('/users', (req, res, next) => {

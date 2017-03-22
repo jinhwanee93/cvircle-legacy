@@ -60,10 +60,6 @@ module.exports = {
     new CopyWebpackPlugin([{ from: PUBLIC_DIR }]),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin(),
-    new DotenvPlugin({
-      sample: './.env.example',
-      path: './.env',
-    }),
   ],
   watch: true,
   stats: { colors: true },

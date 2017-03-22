@@ -46,10 +46,18 @@ class EntryModal extends Component {
 
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      let fbID = this.props.profile.third_party_id
-      axios.get(`http://localhost:3000/users?fbID=${fbID}`)
+      console.log('asdf')
+      var userdata = {
+        firstName: this.props.profile.given_name,
+        lastName: this.props.profile.family_name,
+        fbID: this.props.profile.third_party_id,
+      }
+      axios.get(`http://localhost:3000/users`, {params : {userdata} })
         .then((res) => {
+          console.log('asdfasdfasdfasdfasdf')
           let tmp = res.data[0]["id"]
+          console.log('asd f')
+          console.log(res.data);
           this.setState({
             contributorID: tmp
           })
@@ -89,6 +97,8 @@ class EntryModal extends Component {
         .get(url)
         .then((response) => {
           // formatting object that gets sent to the database + gets updated to app state
+          console.log(this.props)
+          console.log('*****')
           let locationToDatabase = { 
             title: this.state.formTitle,
             body: this.state.formBody,

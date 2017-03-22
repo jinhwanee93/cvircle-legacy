@@ -161,6 +161,7 @@ class Itinerary extends Component {
   }
 
   deleteEntry(entry) {
+    console.log(entry);
     // prevent modal from popping up
     event.preventDefault();
     event.stopPropagation();

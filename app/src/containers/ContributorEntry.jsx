@@ -77,6 +77,7 @@ class ContributorEntry extends Component {
   }
 
   render() {
+    console.log("this.state.id", this.state.id)
     return (
       <div className="single-entry">
         {this.state.isEditing ? 

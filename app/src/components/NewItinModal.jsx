@@ -43,6 +43,7 @@ class NewItinModal extends Component {
     }
     axios.post('http://localhost:3000/itineraries', itinData)
       .then((res) => {
+        itinData.id = res.data.id;
         itinData.created_at = res.data.created_at.substring(0,10)
         this.props.newItinAdded(itinData);
       })

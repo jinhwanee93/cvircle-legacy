@@ -67,6 +67,7 @@ module.exports = (app) => {
   app.post('/entries', (req, res, next) => {
     let fitinID = parseInt(req.body.itinID);
     let fcontributorID = parseInt(req.body.contributorID);
+    console.log('sdfasdf', req.body.contributorID)
     let flat = parseFloat(req.body.lat);
     let flng = parseFloat(req.body.lng);
     let formattedEntry = {
@@ -83,6 +84,7 @@ module.exports = (app) => {
     Entry
       .query()
       .insertAndFetch(formattedEntry)
+      console.log("asdfasdf", formattedEntry)
       .then((entry) => { res.send(entry) })
       .catch((err) => {
         console.log(err)

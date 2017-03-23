@@ -96,7 +96,8 @@ Landing.propTypes = {
   isAuthenticated: React.PropTypes.bool.isRequired,
   onLoginClick: React.PropTypes.func.isRequired,
   onLogoutClick: React.PropTypes.func.isRequired,
-  checkLogin: React.PropTypes.func.isRequired
+  checkLogin: React.PropTypes.func.isRequired,
+  searchterm: React.PropTypes.func.isRequired
 }
 
 export default Landing

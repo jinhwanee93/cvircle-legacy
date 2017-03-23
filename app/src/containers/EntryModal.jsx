@@ -113,6 +113,7 @@ class EntryModal extends Component {
           axios
             .post('http://localhost:3000/entries', qs.stringify(locationToDatabase))
             .then((response) => {
+              locationToDatabase.id = response.data.id;
               this.props.newEntryAdded(locationToDatabase);
             })
             .catch((err) => {

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./server/server.js",
-    "dev": "webpack-dashboard webpack-dev-server --progress --colors",
+    "dev": "webpack-dashboard webpack-dev-server --watch --progress --colors",
     "build": "webpack --watch --progress"
   },
   "repository": {

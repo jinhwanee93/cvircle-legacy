@@ -2,7 +2,7 @@ import Auth0Lock from 'auth0-lock'
 import jwtDecode from 'jwt-decode'
 
 
-// import LogoImg from 'images/test-icon.png';
+import LogoImg from '../../public/images/cvrcle.png';
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -12,12 +12,12 @@ export default class AuthService {
         redirectUrl: 'http://localhost:3000/',
         responseType: 'token'
       },
-      // theme: {
-      //   logo: LogoImg,
-      //   primaryColor: "#b81b1c"
-      // },
+      theme: {
+        logo: LogoImg,
+        primaryColor: "#5b5b5b"
+      },
       languageDictionary: {
-        title: 'React Redux Auth0 Kit'
+        title: 'Welcome!'
       }
     })
     // binds login functions to keep this context

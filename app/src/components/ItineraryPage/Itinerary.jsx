@@ -196,6 +196,7 @@ class Itinerary extends Component {
           <h2 className="itin-name">{this.state.itinName}</h2>
           <div className="map-view">
             <GoogleMap locations={this.state.entries} />
+            {/*<AddNewPicture className="add-picture" data={''} newPictureAdded={this.newPictureAdded} />*/}
             <AddNewEntry className="add-entry" data={''} newEntryAdded={this.newEntryAdded} />
           </div>
           <div className="entries">

@@ -1,4 +1,4 @@
-import * as ActionTypes from '../actions'
+import * as ActionTypes from '../actions/auth'
 import AuthService from '../utils/AuthService'
 import { routerReducer as routing } from 'react-router-redux';
 
@@ -6,9 +6,11 @@ export default function authReducer(state = {
   isAuthenticated: !AuthService.isTokenExpired(),
   isFetching: false,
   profile: AuthService.getProfile(),
-  error: null
+  error: null,
 }, action) {
   switch (action.type) {
+    case ActionTypes.SEARCH_INPUT:
+      return {...state, searchterm: action.input}
     case ActionTypes.LOGIN_REQUEST:
       return {...state, isFetching: true, error: null}
     case ActionTypes.LOGIN_SUCCESS:

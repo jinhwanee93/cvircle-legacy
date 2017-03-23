@@ -138,10 +138,11 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated, profile, error } = state.auth
+  const { isAuthenticated, profile, searchterm, error } = state.auth
   return {
     isAuthenticated,
-    profile
+    profile,
+    searchterm
   }
 }
 

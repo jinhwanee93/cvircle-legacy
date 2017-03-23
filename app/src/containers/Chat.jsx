@@ -20,6 +20,7 @@ class Chat extends React.Component {
 
   handleSubmit() {
     this.props.message(this.state.value);
+    console.log('this.state.value', this.state.value)
   }
 
   render() {

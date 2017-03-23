@@ -11,6 +11,7 @@ const Model = require('objection').Model;
 const cors = require('cors');
 const path = require('path');
 
+
 // load env variables
 dotenv.load();
 
@@ -40,7 +41,13 @@ app.use((err, req, res, next) => {
   } else {
     next();
   }
-})
+});
+
+const server = app.listen(port, function () {
+  console.log('Cvrcle listening on port ' + port);
+});
+//require socket io and connect it to app
+const io = require('socket.io')(server);
 
 // if you decide to use browserHistory instead of hashHistory
 // in react-router
@@ -48,7 +55,11 @@ app.get('*', function response(req, res) {
   res.sendFile(path.join(__dirname, 'app/build/index.html'));
 });
 
-// listen and serve
-app.listen(port, function () {
-  console.log('Cvrcle listening on port ' + port);
+//io connection
+io.on('connection', (socket) => {
+  console.log('user is connected on serverside')
+  socket.emit('test', 'sandra');
+  socket.on('exit', (data) => {
+    console.log('data in io on server side', data);
+  });
 });

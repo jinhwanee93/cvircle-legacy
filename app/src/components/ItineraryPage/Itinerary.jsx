@@ -6,6 +6,7 @@ import ContributorEntry from '../../containers/ContributorEntry.jsx';
 import GoogleMap from '../../containers/map.jsx';
 import AddNewEntry from '../AddNewEntry.jsx';
 import NavBar from '../NavBar/NavBar.js';
+import Chat from '../../containers/Chat.jsx';
 
 /**
  * @description:  Individual itinerary view
@@ -191,6 +192,7 @@ class Itinerary extends Component {
           <div className="map-view">
             <GoogleMap locations={this.state.entries} />
             <AddNewEntry className="add-entry" data={''} newEntryAdded={this.newEntryAdded} />
+            <Chat />
           </div>
           <div className="entries">
             <div>

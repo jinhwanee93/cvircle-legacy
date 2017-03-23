@@ -28,6 +28,7 @@ class HomePage extends Component {
     this.getUserItineraries = this.getUserItineraries.bind(this);
     this.deleteItinerary = this.deleteItinerary.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    // this.toggleFriends = this.toggleFriends.bind(this);
     this.newItinAdded = this.newItinAdded.bind(this)
   }
   //"MAmIuMj8NAdTWtyY6d-ymtYsnLw"
@@ -111,7 +112,7 @@ class HomePage extends Component {
         <div className="col-xs-7 itin-list">
             <Header as='h2' icon textAlign='center'>
               <Header.Content>
-                Your Itineraries
+                Itineraries
                 <span className="add-itin"><button className="btn btn-primary" onClick={this.toggleModal}>New</button></span>
               </Header.Content>
             </Header>

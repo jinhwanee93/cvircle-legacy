@@ -10,10 +10,10 @@ class Entry extends Model {
   static get jsonSchema () {
     return {
       type: 'object',
-      required: [ 'title', 'body', 'lat', 'lng', 'name', 'address', 'contributorID', 'itinID' ],
+      required: ['title', 'body', 'lat', 'lng', 'name', 'address', 'contributorID', 'itinID' ],
 
       properties: {
-        id:             { type: 'integer' },
+        id:             { type: 'integer'},
         title:          { type: 'string', minLength: 1, maxLength: 255 },
         body:           { type: 'string', minLength: 1, maxLength: 255 },
         lat:            { type: 'number', minLength: 1 },

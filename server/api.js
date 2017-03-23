@@ -67,10 +67,10 @@ module.exports = (app) => {
   app.post('/entries', (req, res, next) => {
     let fitinID = parseInt(req.body.itinID);
     let fcontributorID = parseInt(req.body.contributorID);
-    console.log('sdfasdf', req.body.contributorID)
     let flat = parseFloat(req.body.lat);
     let flng = parseFloat(req.body.lng);
     let formattedEntry = {
+      id: req.body.id,
       title: req.body.title,
       body:  req.body.body,
       name:  req.body.name,
@@ -92,6 +92,8 @@ module.exports = (app) => {
   })
 
   app.delete('/entries', (req, res, next) => {
+    console.log('itinID', req.query.itinID);
+    console.log('id', req.query);
     Entry
       .query()
       .where('itinID', req.query.itinID)
@@ -102,6 +104,8 @@ module.exports = (app) => {
   })
 
   app.delete('/itineraries', function (req, res, next) {
+    console.log('ownerID', req.query.ownderID);
+    console.log('id', req.query.id);
     Itinerary
       .query()
       .where('ownerID', req.query.ownerID)

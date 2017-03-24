@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { message } from '../actions/chatindex.jsx';
+import { postComment } from '../actions/chatindex.jsx';
 
 class Chat extends React.Component {
   constructor(props) {
@@ -20,10 +20,13 @@ class Chat extends React.Component {
   }
 
   handleSubmit() {
-    this.props.message(this.state.value);
-    console.log(this.props)
-    console.log('this.state.value', this.state.value)
-   //this.props.postComment()
+    //this.state.value
+    console.log('this.props name in handleSumti CHAT', this.props.name);
+    this.props.postComment({comment : this.state.value, contributorID: this.props.name, entryID : this.props.id});
+    console.log('hanldeSubmit this.props', this.props)
+    //this.props.postComment(this.state.value, this.props.contributorID, this.props.id);
+    //console.log('this.state.value', this.state.value)
+    //this.props.postComment()
   }
 
   render() {
@@ -45,7 +48,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({message }, dispatch);
+  return bindActionCreators({ postComment }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

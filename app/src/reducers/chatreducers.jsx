@@ -1,10 +1,29 @@
 let initialState = {
 //message_sent: false
-messages: [
+comments: [
   'hello'
 ]
 };
-export default function (state = initialState, action) {
+
+export default function (state= initialState, action) {
+  switch (action.type) {
+    case 'COMMENTS_SUBMITTED':
+      return Object.assign({}, state, {
+        comments: action.payload,
+        //message_sent: true,
+    })
+    case 'NAMES':
+      return Object.assign({}, state, {
+        names:action.payload
+      })
+  }
+  return state;
+}
+
+
+
+//this was working before
+/*export default function (state = initialState, action) {
   switch (action.type) {
     case 'MESSAGE_SUBMITTED':
       return Object.assign({}, state, {
@@ -13,4 +32,4 @@ export default function (state = initialState, action) {
     })
   }
   return state;
-}
+}*/

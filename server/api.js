@@ -147,7 +147,7 @@ module.exports = (app) => {
       console.log('req.query', req.query);
     let entryID = parseInt(req.body.entryID);
     let comment = req.body.comment;
-    let contributorID = parseInt(req.body.contributorID);
+    let contributorID = req.body.contributorID;
     //console.log('+++++++++++++++++++++++++++', typeof entryId, typeof contributorId)
     let comments = {
       entryID : entryID, 
@@ -157,6 +157,9 @@ module.exports = (app) => {
     console.log(comments);
     Comment
       .query()
+      .allowEager('[comments]')
+      .eager(req.query.eager)
+      .skipUndefined()
       .insertAndFetch(comments)
       .then((entry) => { res.send(entry) })
       .catch((err) => {
@@ -164,6 +167,24 @@ module.exports = (app) => {
         next(err);
      });
    })
+
+   app.get('/comments', (req, res, next) => {
+    Comment
+      .query()
+      .then((comments) => { res.send(comments);})
+      .catch(next);
+  })
+
+  app.get('/usernames', (req, res, next) => {
+    User
+     .query()
+     .allowEager('[users]')
+     .eager(req.query.eager)
+     .skipUndefined()
+     .where('id', req.query.contributorID)
+     .then((user) => { res.send(user);})
+     .catch(next);
+  })
 }
 
    app.get('/friends', (req, res, next) => {

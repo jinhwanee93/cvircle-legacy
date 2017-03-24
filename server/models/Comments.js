@@ -16,7 +16,7 @@ class Comment extends Model {
       properties: {
         id:             { type: 'integer'},
         comment:        { type: 'string', minLength: 1, maxLength: 255 },
-        contributorID:  { type: 'number' },
+        contributorID:  { type: 'string', minLength: 1, maxLength: 255 },
         entryID:        { type: 'number' }
       }
     };
@@ -36,14 +36,14 @@ class Comment extends Model {
       },
 
       // Each entry is uniquely contributed by one user
-      contributor: {
+/*      contributor: {
         relation: Model.BelongsToOneRelation,
         modelClass: __dirname + '/User',
         join: {
           from: 'comments.contributorID',
           to: 'users.id'
         }
-      }
+      }*/
     }
   }
 }

@@ -7,6 +7,7 @@ class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: '' };
+  
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -20,7 +21,9 @@ class Chat extends React.Component {
 
   handleSubmit() {
     this.props.message(this.state.value);
+    console.log(this.props)
     console.log('this.state.value', this.state.value)
+   //this.props.postComment()
   }
 
   render() {
@@ -29,7 +32,7 @@ class Chat extends React.Component {
             <input
               type="text" onChange={this.handleChange.bind(this)}
             />
-            <input type="submit" value="enter"/>
+            <input type="submit" value="comment"/>
           </form>
     );
   }
@@ -42,7 +45,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({message}, dispatch);
+  return bindActionCreators({message }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

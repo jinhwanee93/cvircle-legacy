@@ -2,6 +2,7 @@ const objection = require('objection');
 const User = require('./models/User');
 const Itinerary = require('./models/Itinerary');
 const Entry = require('./models/Entry');
+const Comment = require('./models/Comments');
 
 // we should refactor this to DRY out the code and instead use
 // express.router and controllers modularly
@@ -136,4 +137,27 @@ module.exports = (app) => {
       .catch(next);
   })
 
-};
+    app.post('/comments', (req, res, next) => {
+      console.log('in POST')
+      console.log('req.body', req.body);
+      console.log('req.query', req.query);
+    let entryID = parseInt(req.body.entryID);
+    let comment = req.body.comment;
+    let contributorID = parseInt(req.body.contributorID);
+    //console.log('+++++++++++++++++++++++++++', typeof entryId, typeof contributorId)
+    let comments = {
+      entryID : entryID, 
+      comment: comment, 
+      contributorID : contributorID, 
+    }
+    console.log(comments);
+    Comment
+      .query()
+      .insertAndFetch(comments)
+      .then((entry) => { res.send(entry) })
+      .catch((err) => {
+        console.log(err)
+        next(err);
+     });
+   })
+}

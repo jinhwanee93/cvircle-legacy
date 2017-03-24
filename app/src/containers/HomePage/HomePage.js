@@ -7,7 +7,8 @@ import { hashHistory } from 'react-router';
 import { Link } from 'react-router';
 import $ from 'jquery';
 import { connect } from 'react-redux';
-import NewItinModal from '../../components/NewItinModal.jsx'
+import NewItinModal from '../../components/NewItinModal.jsx';
+import FriendsList from '../FriendsList.jsx';
 
 /**
  * @description:  HomePage.js renders a unique homepage for every user after logging in
@@ -108,6 +109,7 @@ class HomePage extends Component {
               <div className="description">Welcome. Where will you be headed to next?</div>
             </div>
           </div>
+          <FriendsList />
         </div>
         <div className="col-xs-7 itin-list">
             <Header as='h2' icon textAlign='center'>

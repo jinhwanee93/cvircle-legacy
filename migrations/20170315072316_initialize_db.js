@@ -55,4 +55,5 @@ exports.down = function(knex, Promise) {
     .dropTableIfExists('users_itins')
     .dropTableIfExists('entries_itins')
     .dropTableIfExists('comments')
+    .dropTableIfExists('friends')
 };

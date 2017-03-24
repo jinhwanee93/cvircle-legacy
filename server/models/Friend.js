@@ -32,7 +32,7 @@ class Friend extends Model {
       },
 
       friends2: {
-        relation: Model.HasManyRelation,
+        relation: Model.BelongsToOneRelation,
         modelClass: __dirname + '/User',
         join: {
           from: 'friends.friendB',

@@ -5,7 +5,6 @@ const Entry = require('./models/Entry');
 const Comment = require('./models/Comments');
 const Friend = require('./models/Friend');
 
-
 // we should refactor this to DRY out the code and instead use
 // express.router and controllers modularly
 
@@ -19,11 +18,10 @@ const Friend = require('./models/Friend');
 
 module.exports = (app) => { 
   app.get('/users', (req, res, next) => {
-    console.log("this is userdata", req.query.userdata);
     var data = JSON.parse(req.query.userdata)
     User
       .query()
-      .allowEager('[itineraries, entries, friends1, friends2]') // wanting to get friends table here during get
+      .allowEager('[itineraries, entries]') // wanting to get friends table here during get
       .eager(req.query.eager)
       // .skipUndefined()
       .where('fbID', data.fbID)
@@ -35,7 +33,7 @@ module.exports = (app) => {
               fbID: data.fbID,
               firstName: data.firstName,
               lastName: data.lastName,
-              email: 'thisistheseedingemail@seedislife.com', // to do: remove email from schema - not available in FB profile
+              email: 'asdf@asdf.com', // to do: remove email from schema - not available in FB profile
             })
             .then((user) => { 
               console.log("success", user);
@@ -96,8 +94,6 @@ module.exports = (app) => {
   })
 
   app.delete('/entries', (req, res, next) => {
-    console.log('itinID', req.query.itinID);
-    console.log('id', req.query);
     Entry
       .query()
       .where('itinID', req.query.itinID)
@@ -108,8 +104,6 @@ module.exports = (app) => {
   })
 
   app.delete('/itineraries', function (req, res, next) {
-    console.log('ownerID', req.query.ownderID);
-    console.log('id', req.query.id);
     Itinerary
       .query()
       .where('ownerID', req.query.ownerID)
@@ -133,6 +127,7 @@ module.exports = (app) => {
   })
 
   app.post('/itineraries', (req, res, next) => {
+    // there is something wrong going on with Auth and this function
     Itinerary
       .query()
       .insertAndFetch(req.body)
@@ -142,19 +137,14 @@ module.exports = (app) => {
 
 
     app.post('/comments', (req, res, next) => {
-      console.log('in POST')
-      console.log('req.body', req.body);
-      console.log('req.query', req.query);
     let entryID = parseInt(req.body.entryID);
     let comment = req.body.comment;
     let contributorID = parseInt(req.body.contributorID);
-    //console.log('+++++++++++++++++++++++++++', typeof entryId, typeof contributorId)
     let comments = {
       entryID : entryID, 
       comment: comment, 
       contributorID : contributorID, 
     }
-    console.log(comments);
     Comment
       .query()
       .insertAndFetch(comments)
@@ -164,22 +154,48 @@ module.exports = (app) => {
         next(err);
      });
    })
-}
+
 
    app.get('/friends', (req, res, next) => {
-    console.log("this is what i need", req.query);
     Friend
       .query()
       .allowEager('[friends1, friends2]') // wanting to get friends table here during get
       .eager(req.query.eager)
       .skipUndefined()
       .where('id', req.query.id)
-      .then((friends) => { res.send(friends)})
+      .then((friend) => { res.send(friend)})
       .catch(next)
   })
 
   app.post('/friends', (req, res, next) => {
+    console.log("what is the request? ", req.body)
+    let friend1 = parseInt(req.body.friendA)
+    let friend2 = parseInt(req.body.friendB)
+    let whatIWant = {
+      friendA: friend1,
+      friendB: friend2,
+    }
+    Friend
+      .query()
+      .insertAndFetch(whatIWant)
+      .then((friend) => { res.send(friend) })
+      .catch((err) => {
+        console.log(err)
+        next(err);
+      });
+  })
 
+  app.get('/friendSearch', (req, res, next) => {
+    var firstName, lastName;   
+    req.query.firstName !== undefined ? firstName = '%' + req.query.firstName + '%' : console.log("firstName is undefined")
+    req.query.lastName !== undefined ? lastName = '%' + req.query.lastName + '%' : console.log("lastName is undefined")
+    User
+      .query()
+      .skipUndefined()
+      .where('firstName', 'like', firstName)
+      .where('lastName', 'like', lastName)
+      .then((users) => { res.send(users) })
+      .catch(next)
   })
 
 };

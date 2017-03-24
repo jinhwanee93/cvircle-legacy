@@ -2,6 +2,7 @@ const objection = require('objection');
 const User = require('./models/User');
 const Itinerary = require('./models/Itinerary');
 const Entry = require('./models/Entry');
+const Friend = require('./models/Friend');
 
 // we should refactor this to DRY out the code and instead use
 // express.router and controllers modularly
@@ -14,12 +15,13 @@ const Entry = require('./models/Entry');
 // The insertOne function can look like this:
 // controller.insertOne(payload, ModelType) 
 
-module.exports = (app) => {
+module.exports = (app) => { 
   app.get('/users', (req, res, next) => {
+    console.log("this is userdata", req.query.userdata);
     var data = JSON.parse(req.query.userdata)
     User
       .query()
-      .allowEager('[itineraries, entries]')
+      .allowEager('[itineraries, entries, friends1, friends2]') // wanting to get friends table here during get
       .eager(req.query.eager)
       // .skipUndefined()
       .where('fbID', data.fbID)
@@ -31,7 +33,7 @@ module.exports = (app) => {
               fbID: data.fbID,
               firstName: data.firstName,
               lastName: data.lastName,
-              email: 'fakeemail@something.com', // to do: remove email from schema - not available in FB profile
+              email: 'thisistheseedingemail@seedislife.com', // to do: remove email from schema - not available in FB profile
             })
             .then((user) => { 
               console.log("success", user);
@@ -134,6 +136,22 @@ module.exports = (app) => {
       .insertAndFetch(req.body)
       .then((itinerary) => { res.send(itinerary)})
       .catch(next);
+  })
+
+   app.get('/friends', (req, res, next) => {
+    console.log("this is what i need", req.query);
+    Friend
+      .query()
+      .allowEager('[friends1, friends2]') // wanting to get friends table here during get
+      .eager(req.query.eager)
+      .skipUndefined()
+      .where('id', req.query.id)
+      .then((friends) => { res.send(friends)})
+      .catch(next)
+  })
+
+  app.post('/friends', (req, res, next) => {
+
   })
 
 };

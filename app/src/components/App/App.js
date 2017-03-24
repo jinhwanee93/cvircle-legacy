@@ -21,6 +21,7 @@ class App extends React.Component {
   }
 }
 
+// Type check
 App.propTypes = {
   children: React.PropTypes.element.isRequired,
   checkLogin: React.PropTypes.func.isRequired

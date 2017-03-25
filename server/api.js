@@ -4,6 +4,9 @@ const Itinerary = require('./models/Itinerary');
 const Entry = require('./models/Entry');
 const Comment = require('./models/Comments');
 const Friend = require('./models/Friend');
+const Cloudinary = require('cloudinary')
+const Pictures = require('./models/Pictures');
+
 
 // we should refactor this to DRY out the code and instead use
 // express.router and controllers modularly
@@ -62,6 +65,7 @@ module.exports = (app) => {
       // we can add 'where' logic to filter and query results
       .query()
       .skipUndefined()
+      // console.log(req.query.itinID, "THIS IS ITINIDDDDD")
       .where('itinID', req.query.itinID)
       .where('contributorID', req.query.contributorID)
       .then((entries) => { res.send(entries); })
@@ -138,7 +142,6 @@ module.exports = (app) => {
       })
   })
   app.post('/itineraries', (req, res, next) => {
-    // there is something wrong going on with Auth and this function
     Itinerary
       .query()
       .insertAndFetch(req.body)
@@ -228,5 +231,49 @@ module.exports = (app) => {
       .catch(next)
   })
 
+  Cloudinary.config({ 
+  cloud_name: 'ddcrxxkge', 
+  api_key: '135915495998577', 
+  api_secret: 'yd8nXf1oai0DgVr8I4RgDVBpxl8' 
+});
+
+app.get('/pictures', (req, res, next ) =>{
+  var parseID = JSON.parse(req.query.picdata).itinID
+  Pictures
+      .query()
+      .where('picItinID', parseID )
+      // console.log(parseID, "this is ITINREQ")
+      .then((pictures) => {
+        console.log(pictures, "show me pictures")
+        res.send(pictures)
+      })
+
+})
+
+app.post('/pictures', (req, res, next) =>{
+      User
+      .query()
+      .where('fbID', req.body.picUserID)
+      .then((users) => { 
+        // console.log(users, "this is users")
+        // console.log(users[0].id, "this is users id")
+  let asdf1 = parseInt(req.body.picItinID)
+  let asdf2 = users[0].id
+  let whatIWant = {
+    picItinID: asdf1,
+    picUserID: asdf2,
+    url: req.body.url
+  }
+  // console.log('what is this? ', whatIWant)
+      Pictures
+      .query()
+      .insertAndFetch(whatIWant)
+      .then((pictures) => { res.send(pictures)})
+      .catch((err) => {
+        console.log(err);
+      });
+
+})
+})
 };
 

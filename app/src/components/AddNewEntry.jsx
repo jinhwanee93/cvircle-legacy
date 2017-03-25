@@ -44,7 +44,6 @@ class AddNewEntry extends Component {
           className="entry btn-primary"
           onClick={this.toggleModal}>Add New Entry
         </Button>
-        <Button>Another button</Button>
       </span>
     );
   }

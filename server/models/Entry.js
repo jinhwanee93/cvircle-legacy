@@ -1,6 +1,7 @@
 const Model = require('objection').Model;
 const User = require('./User')
 const Itinerary = require('./Itinerary')
+const Pictures = require('./Pictures')
 
 class Entry extends Model {
   static get tableName() {
@@ -48,6 +49,7 @@ class Entry extends Model {
           to: 'users.id'
         }
       }
+
     }
   }
 

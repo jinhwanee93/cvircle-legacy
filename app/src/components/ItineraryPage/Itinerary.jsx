@@ -10,6 +10,8 @@ import Chat from '../../containers/Chat.jsx';
 import Post from '../../containers/Post.jsx';
 import { Button, Comment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import AddNewPicture from '../AddNewPicture.jsx';
+
 
 /**
  * @description:  Individual itinerary view
@@ -31,11 +33,17 @@ class Itinerary extends Component {
     this.getUserEntries = this.getUserEntries.bind(this);
     this.deleteEntry = this.deleteEntry.bind(this);
     this.getQueryParams = this.getQueryParams.bind(this);
-    this.getItinName = this.getItinName.bind(this)
+    this.getItinName = this.getItinName.bind(this);
+    // this.newPictureAdded = this.newPictureAdded.bind(this)
 
     this.itinID = Number(this.getQueryParams('itinID'));
   }
   
+newPictureAdded(){
+
+}
+
+
   // gets itineraryID from the url
   getQueryParams(param) {
     var query = window.location.hash.substring(1);
@@ -196,7 +204,7 @@ class Itinerary extends Component {
           <h2 className="itin-name">{this.state.itinName}</h2>
           <div className="map-view">
             <GoogleMap locations={this.state.entries} />
-            {/*<AddNewPicture className="add-picture" data={''} newPictureAdded={this.newPictureAdded} />*/}
+            <AddNewPicture className="add-picture" data={''} newPictureAdded={this.newPictureAdded} />
             <AddNewEntry className="add-entry" data={''} newEntryAdded={this.newEntryAdded} />
           </div>
           <div className="entries">

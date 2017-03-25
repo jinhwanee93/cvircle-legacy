@@ -4,20 +4,33 @@ import { bindActionCreators } from 'redux';
 import { showComments } from '../actions/chatindex.jsx';
 import { Card } from 'semantic-ui-react';
 import { Button, Comment } from 'semantic-ui-react';
-import { loadComments } from '../actions/chatindex.jsx';
+// import { showComments } from '../actions/chatindex.jsx';
 import { deleteComment } from '../actions/chatindex.jsx';
+import axios from 'axios';
 
 class Post extends React.Component {
-componentWillMount(){
-  console.log('post 11')
- loadComments();
-};
 
+
+componentWillMount() {
+  this.getPosts();
+}
+
+
+  getPosts() {
+    var self = this;
+    setInterval(() => {
+      console.log(this.props.messages.comments)
+      axios.get('/comments')
+        .then((results) => {
+          // console.log(results)
+          self.props.showComments(results.data)
+    })
+  }, 2000)
+  }
   renderMessages(){
     //console.log('this.props.messages.comments', this.props.messages.comments)
-    console.log('this.props.messages.names', this.props.messages.names);
+    // console.log('this.props.messages.names', this.props.messages.names);
     return this.props.messages.comments.map((item) => {
-      console.log('ITEM in POST', item)
        //console.log('itemEntryID', item.entryID);
        //console.log('item.conributorID', item.contributorID)
        //console.log('this.props.id', this.props.id);
@@ -30,7 +43,7 @@ componentWillMount(){
   }
   
   render (){
-    //console.log('THIS PROPS MESSAGES', this.props.comments)
+    console.log('THIS PROPS MESSAGES', this.props.messages.comments)
     return(
       <div className="commentbox">{this.renderMessages()}</div>
     )
@@ -44,7 +57,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ showComments, showNames, loadComments, deleteComment }, dispatch);
+  return bindActionCreators({ showComments, deleteComment }, dispatch);
 }
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

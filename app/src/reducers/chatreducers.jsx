@@ -6,6 +6,7 @@ comments: [
 };
 
 export default function (state= initialState, action) {
+  console.log(action);
   switch (action.type) {
     case 'COMMENTS_SUBMITTED':
       return Object.assign({}, state, {

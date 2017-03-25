@@ -193,13 +193,18 @@ module.exports = (app) => {
       .eager(req.query.eager)
       .skipUndefined()
       .where('id', req.query.id)
-      .then((friend) => { res.send(friend)})
+      .then(friend => { res.send(friend)})
       .catch(next)
   })
 
   app.post('/friends', (req, res, next) => {
-    console.log("what is the request? ", req.body)
-    let friend1 = parseInt(req.body.friendA)
+    console.log("asdfasdf12345 ", req.body)
+    User
+    .query()
+    .where('fbID', req.body.friendA)
+    .then(users => {
+    console.log("is this what i want? ", users[0].id)
+    let friend1 = users[0].id
     let friend2 = parseInt(req.body.friendB)
     let whatIWant = {
       friendA: friend1,
@@ -213,6 +218,7 @@ module.exports = (app) => {
         console.log(err)
         next(err);
       });
+    })
   })
 
   app.get('/friendSearch', (req, res, next) => {

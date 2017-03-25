@@ -54,22 +54,23 @@ toggleModal() {
     })
 }
 
-addFriend() {
-    this.setState({
-      addFriend: this.state.searchedFriends
+addFriend(item) {
+    axios
+    .post('/friends', {
+        friendA: this.props.profile.third_party_id,
+        friendB: item.id
     })
 }
 
   render() {
-      console.log(this.state.showModal);
-      console.log(this.state.addFriend);
+      console.log(this.props.profile.third_party_id, "this is profile?")
       return (
         <div>
         <Modal show={this.state.showModal} onHide={this.close}>
             <Modal.Header>Searched Friends</Modal.Header>
             <Modal.Body>
             <form>
-                {this.state.searchedFriends ? (this.state.searchedFriends.map(item => (<div style={{ cursor: 'pointer'}} onClick={this.addFriend}>{item.firstName} {item.lastName}</div>))) : (<div>NOPE</div>)}
+                {this.state.searchedFriends ? (this.state.searchedFriends.map(item => (<div style={{ cursor: 'pointer'}} onClick={() => {this.addFriend(item)}}>{item.firstName} {item.lastName}</div>))) : (<div>NOPE</div>)}
             </form>
             </Modal.Body>
             <Modal.Footer>
@@ -88,4 +89,13 @@ addFriend() {
   }
 }
 
-export default FriendSearch;
+// export default FriendSearch;
+const mapStateToProps = (state) => {
+  const { isAuthenticated, profile, error } = state.auth
+  return {
+    isAuthenticated,
+    profile
+  }
+}
+
+export default FriendSearch = connect(mapStateToProps)(FriendSearch)

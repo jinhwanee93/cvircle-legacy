@@ -58,30 +58,37 @@ class Landing extends React.Component {
 
         <div className="container" style={{ marginTop: 40, marginBottom: 80 }}>
           <div style={{ textAlign: 'center', marginTop: 2, marginBottom: 40 }}>
-            <h3>Meet the Cvrcle Team</h3>
+            <h3>Meet Team Megazord</h3>
           </div>
             <div style={{ textAlign: 'center', marginTop: 2, marginBottom: 40 }}></div>
           <Grid>
             <Row>
-              <Col xs={6} md={4}>
-                <Image src='./images/andrew-img.jpg' className="img-circle" />
+              <Col xs={6} md={3}>
+                <Image src='https://media.giphy.com/media/kKdgdeuO2M08M/giphy.gif' className="img-circle" />
                 <div style={ {textAlign: 'center' }}>
-                  <h3 style={{ fontWeight: 200}}> Andrew Yi </h3>
-                  <h4>Code Monkey</h4>
+                  <h3 style={{ fontWeight: 200}}> Alexandre Kim </h3>
+                  <h4>Scrum Lord</h4>
                 </div>
               </Col>
-              <Col xs={6} md={4}>
-                <Image src='./images/regina-img.jpg' className="img-circle" />
+              <Col xs={6} md={3}>
+                <Image src='http://www.media2.hw-static.com/wp-content/uploads/55025796.jpg' className="img-circle" />
                 <div style={{ textAlign: 'center' }}>
-                  <h3 style={{ fontWeight: 200}}> Regina Lee </h3>
-                  <h4>Doctor Regina</h4>
+                  <h3 style={{ fontWeight: 200}}> Brandon Kleiman </h3>
+                  <h4>ex: Scrum Lord</h4>
                 </div>
               </Col>
-              <Col xsHidden md={4}>
-                <Image src='./images/armen-img.jpg' className="img-circle" />
+              <Col xs={6} md={3}>
+                <Image src='https://m.popkey.co/f03682/MMjqz.gif' className="img-circle" />
                 <div style={{ textAlign: 'center' }}>
-                  <h3 style={{ fontWeight: 200}}> Armen Rostam </h3>
-                  <h4>DevOps Server God</h4>
+                  <h3 style={{ fontWeight: 200}}> Sandra Henkel </h3>
+                  <h4>Product Owner</h4>
+                </div>
+              </Col>
+              <Col xsHidden md={3}>
+                <Image src='https://s-media-cache-ak0.pinimg.com/736x/51/68/59/51685923aaa5e1ae7d0e80ae737befd5.jpg' className="img-circle" />
+                <div style={{ textAlign: 'center' }}>
+                  <h3 style={{ fontWeight: 200}}> Emily Yang </h3>
+                  <h4>"The Matchy Matchy"</h4>
                 </div>
               </Col>
             </Row>

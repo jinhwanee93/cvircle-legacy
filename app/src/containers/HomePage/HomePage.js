@@ -9,6 +9,7 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 import NewItinModal from '../../components/NewItinModal.jsx';
 import FriendsList from '../FriendsList.jsx';
+import { Parallax, Background } from 'react-parallax';
 
 /**
  * @description:  HomePage.js renders a unique homepage for every user after logging in

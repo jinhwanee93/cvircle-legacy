@@ -148,7 +148,7 @@ export function loadItinsAction () {
         var fmtItins = []
         for (var i = 0; i < result.data.length; i++) {
           var tmp = {
-            description: result.data[i].firstName + ' ' + result.data[i].lastName,
+            description: result.data[i].firstname + ' ' + result.data[i].lastName,
             image: result.data[i].email,
             price: '',
             title: result.data[i].itinName,

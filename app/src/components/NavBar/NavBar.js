@@ -25,7 +25,9 @@ const NavBar = ({ isAuthenticated, onLoginClick, onLogoutClick, loadItins, handl
           ? (<button onClick={onLoginClick} className="navbar-links">Login</button>)
           : (<button onClick={onLogoutClick} className="navbar-links">Logout</button>)}
       </Nav>
-      <Nav>
+      {!isAuthenticated
+      ? (<div> </div> )
+      : (<Nav>
         <Grid>
           <Grid.Column width={8}>
             <Search
@@ -39,7 +41,8 @@ const NavBar = ({ isAuthenticated, onLoginClick, onLogoutClick, loadItins, handl
           <Grid.Column width={8}>
           </Grid.Column>
         </Grid>
-      </Nav>
+      </Nav>) }
+      
     </Navbar>
   </div>
   )

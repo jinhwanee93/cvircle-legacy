@@ -1,6 +1,7 @@
 const Model = require('objection').Model;
 const Itinerary = require('./Itinerary')
 const Entry = require('./Entry')
+const Pictures = require('./Pictures')
 
 class User extends Model {
   static get tableName() {
@@ -51,7 +52,18 @@ class User extends Model {
           from: 'users.id',
           to: 'entries.contributorID'
         }
+      },
+
+      pictures: {
+        relation: Model.HasManyRelation,
+        modelClass: __dirname + '/Pictures',
+        join: {
+          from: 'users.id',
+          to: 'pictures.picUserID'
+        }
       }
+
+
     }
   }
 

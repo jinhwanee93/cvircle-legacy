@@ -45,6 +45,15 @@ exports.up = function(knex, Promise) {
       table.integer('friendB').unsigned().references('id').inTable('users').onDelete('CASCADE');
       table.timestamps(true);
     })
+
+    .createTable('pictures', (table) => {
+      table.increments('id').primary();
+      table.integer('picItinID').unsigned().references('id').inTable('itineraries').onDelete('CASCADE');
+      table.integer('picUserID').unsigned().references('id').inTable('users').onDelete('CASCADE');
+      table.string('url', 255);
+    })
+
+
 };
 
 exports.down = function(knex, Promise) {
@@ -56,4 +65,6 @@ exports.down = function(knex, Promise) {
     .dropTableIfExists('entries_itins')
     .dropTableIfExists('comments')
     .dropTableIfExists('friends')
+    .dropTableIfExists('pictures')
+
 };

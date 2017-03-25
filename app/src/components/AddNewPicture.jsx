@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import EntryModal from '../containers/EntryModal.jsx';
+import PictureModal from '../containers/PictureModal.jsx';
 import { Button }  from 'react-bootstrap';
 
 // add new entry Button
 
-class AddNewEntry extends Component {
+class AddNewPicture extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ class AddNewEntry extends Component {
     return (
       <span>
         {this.state.isClicked ? 
-          <EntryModal 
+          <PictureModal 
             resetFlag={this.toggleModal} 
             updateEntry={this.updateEntry}
             newEntryAdded={this.props.newEntryAdded}
@@ -42,12 +42,12 @@ class AddNewEntry extends Component {
           id={this.state.id} 
           bsStyle="default"
           className="entry btn-primary"
-          onClick={this.toggleModal}>Add New Entry
+          onClick={this.toggleModal}>View Pictures
         </Button>
       </span>
     );
   }
 }
 
-export default AddNewEntry;
+export default AddNewPicture;
 

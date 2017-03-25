@@ -18,10 +18,11 @@ const Friend = require('./models/Friend');
 
 module.exports = (app) => { 
   app.get('/users', (req, res, next) => {
+    console.log('sadfadsf', req.body)
     var data = JSON.parse(req.query.userdata)
     User
       .query()
-      .allowEager('[itineraries, entries]') // wanting to get friends table here during get
+      .allowEager('[itineraries, entries]')
       .eager(req.query.eager)
       // .skipUndefined()
       .where('fbID', data.fbID)
@@ -46,6 +47,7 @@ module.exports = (app) => {
       }})
       .catch(next)
   })
+
 
   app.post('/users', (req, res, next) => {
     User

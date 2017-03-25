@@ -12,7 +12,6 @@ class myPictureCar extends Component {
         this.state = {
             index: 0,
             direction: null,
-            pictures: []
         }
         this.handleSelect = this.handleSelect.bind(this)
     }
@@ -41,32 +40,33 @@ class myPictureCar extends Component {
     })
   }
 
-componentWillMount (){
-    console.log("mounted")
-    var picdata = {
-        itinID: this.props.locationBeforeTransitions.query.itinID,
-      }
-    axios.get('/pictures', {params : {picdata}})
-        .then((result) => {
-            this.setState({
-                pictures: result.data
-            })
-          })
+// componentDidMount (){
+//     console.log("mounted")
+//     var picdata = {
+//         itinID: this.props.locationBeforeTransitions.query.itinID,
+//       }
+//     axios.get('/pictures', {params : {picdata}})
+//         .then((result) => {
+//             this.setState({
+//                 pictures: result.data
+//             })
+//           })
         
-        .catch((err) => {
-          console.log(err)
-        })
-}
+//         .catch((err) => {
+//           console.log(err)
+//         })
+// }
  
 
 render() {
 // console.log(this.props.locationBeforeTransitions.query.itinID, "this is ITINID")
 // console.log(this.state.pictures, "this is state pictures!")
+console.log(this.props.pictures, "this is picture array!!!!")
     return (
           <div>
- <Carousel activeIndex={this.state.index} direction={this.state.direction} onSelect={this.handleSelect}>
-         {this.state.pictures.length ?
-         (this.state.pictures.map((picture, i) => (
+ <Carousel activeIndex={this.state.index} direction={this.props.direction} onSelect={this.handleSelect}>
+         {this.props.pictures.length ?
+         (this.props.pictures.map((picture, i) => (
         <Carousel.Item>
           <img width="225" height="125" alt="225x125" src={ picture.url }/>
           {/*<Carousel.Caption>

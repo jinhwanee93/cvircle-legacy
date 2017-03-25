@@ -35,6 +35,14 @@ class User extends Model {
         }
       },
 
+       friends: {
+        relation: Model.HasManyRelation,
+        modelClass: __dirname + '/Friends',
+        join: {
+          from: 'users.id',
+          to: 'users.id'
+        }
+      },
       //A user contributes many entries (to their own itineraires, and to those of others)
       entries: {
         relation: Model.HasManyRelation,

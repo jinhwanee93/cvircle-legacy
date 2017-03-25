@@ -1,17 +1,18 @@
 import { connect } from 'react-redux'
-import { loginRequest, logoutSuccess, handleSearch, handleSearchInput } from '../../actions/auth'
+import { loginRequest, logoutSuccess, loadItinsAction, handleResultSelect, resetComponent, handleSearchChange, handleSearch, handleSearchInput } from '../../actions/auth'
 import { NavBar } from '../../components'
 import { hashHistory } from 'react-router'
 
+
 const mapStateToProps = (state) => {
-  const { isAuthenticated, profile, error, searchterm } = state.auth
-  console.log(searchterm)
-  console.log('&&&&&&&')
+  const { isAuthenticated, results, profile, options, error, searchterm } = state.auth
   return {
     isAuthenticated,
     profile,
     error,
-    searchterm
+    results,
+    searchterm,
+    options
   }
 }
 
@@ -31,6 +32,22 @@ const mapDispatchToProps = (dispatch) => {
     handleSearchInput: (e) => {
       console.log(e.target.value)
       dispatch(handleSearchInput(e.target.value))
+    },
+    resetComponent: () => {
+
+      dispatch(resetComponent())
+    },
+    loadItins: (options) => {
+      if (options.length === 0) {
+        dispatch(loadItinsAction())
+      }
+    },
+    handleResultSelect: (e, result) => {
+      dispatch(handleResultSelect(result))
+    },
+
+    handleSearchChange: (opts, e, value) => {
+      dispatch(handleSearchChange(value, opts))
     }
   }
 }

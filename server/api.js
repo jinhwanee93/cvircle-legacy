@@ -128,6 +128,15 @@ module.exports = (app) => {
       .catch(next);
   })
 
+  app.get('/itinsByUser', (req, res, next) => {
+    Itinerary
+      .query()
+      .select('itineraries.*', 'users.firstname', 'users.lastName', 'users.email' )
+      .join('users', 'itineraries.ownerID', 'users.id' )
+      .then((result) => {
+        res.send(result)
+      })
+  })
   app.post('/itineraries', (req, res, next) => {
     // there is something wrong going on with Auth and this function
     Itinerary

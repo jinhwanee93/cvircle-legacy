@@ -20,18 +20,6 @@ export function xcomment(item){
   }
 }
 
-export function loadComments() {
-   return (dispatch) => {
-     console.log('19 chatindex')
-    axios.get('/comments')
-    .then((results) => {
-      console.log('22')
-    console.log('results from GET', results)
-    dispatch(showComments(results.data));
-  })
- }
-}
-
 export function deleteComment(item){
   console.log('item in chatindex', item)
   return () => {
@@ -43,23 +31,21 @@ export function deleteComment(item){
    }
  }
 
+ export function test(val) {
+   console.log(val)
+ }
+
 export function postComment(data) {
-  //console.log('result in chatindex', data);
-  //console.log('data.id', data.entryID)
-  //event.preventDefault();
-  //event.stopPropagation();
   return (dispatch) => {
     axios.post('/comments', data)
-    .then(() => {
-      //console.log('data sent to db')
-    })
     .then(()=> {
-    axios.get('/comments')
-    .then((results) => {
+      axios.get('/comments')
+      .then((results) => {
     console.log('results from GET', results)
     dispatch(showComments(results.data));
   })
  })
+}
 }
   // .then(()=> {
   //   axios.get('/usernames', { contributorID : data.contributorID})
@@ -86,5 +72,3 @@ export function postComment(data) {
     type: 'MESSAGE_SUBMITTED',
     payload: [data]*/
   
-
-  }

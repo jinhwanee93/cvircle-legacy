@@ -300,3 +300,19 @@
   background-color: #F0F8FF;
 }
 
+.searchStuff {
+  border-radius: 15px;
+}
+
+.submitButton {
+  border-radius: 6px;
+  background-color: whitesmoke;
+  border: 1px solid lightgrey;
+}
+
+.friendsList {
+  border: 1px solid lightgrey;
+  padding: 1em;
+  margin: auto;
+  width: 328px;
+}

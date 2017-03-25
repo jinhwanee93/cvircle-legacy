@@ -35,12 +35,13 @@ module.exports = (app) => {
               fbID: data.fbID,
               firstName: data.firstName,
               lastName: data.lastName,
-              email: 'http://www.lincscareassociation.org.uk/data/files/NoImageSelected.png'
+              email: 'asdf@asdfasdf.com'
             })
             .then((user) => {
               res.send(user)
             })
             .catch((err) => {
+              console.log("this is error ", err)
               next(err)
             })
         } else {

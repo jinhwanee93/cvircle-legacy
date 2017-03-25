@@ -88,8 +88,8 @@ addFriend(item) {
         </Modal>
             
             <form onSubmit={this.searchFriend}>
-            <input type='search' placeholder='Search for Friends' onChange={this.handleChange}/>
-            <button type='submit'>Submit</button>
+            <input className='searchStuff' type='search' placeholder='Search for Friends' onChange={this.handleChange}/>
+            <button className='submitButton' type='submit'>Submit</button>
             </form>
         </div>
       )

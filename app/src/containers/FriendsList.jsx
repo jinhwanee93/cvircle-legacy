@@ -24,12 +24,12 @@ componentWillReceiveProps() {
 render() {
     console.log(this.state.arr)
     return(
-        <div>
+        <div className='friendsList'>
             <div>
-              <h3>Your Friends</h3>
+              <h3>Friends</h3>
               <FriendSearch />
             </div>
-            {this.state.arr.map((friend) => (<div>{friend.ffn} {friend.fln}</div>))}
+            {this.state.arr.map((friend) => (<FriendEntry ffn={friend.ffn} fln={friend.fln} />))}
         </div>
     )
 }

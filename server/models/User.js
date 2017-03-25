@@ -2,6 +2,7 @@ const Model = require('objection').Model;
 const Itinerary = require('./Itinerary')
 const Entry = require('./Entry')
 const Pictures = require('./Pictures')
+const Friend = require('./Friend')
 
 class User extends Model {
   static get tableName() {
@@ -36,14 +37,14 @@ class User extends Model {
         }
       },
 
-       friends: {
-        relation: Model.HasManyRelation,
-        modelClass: __dirname + '/Friends',
-        join: {
-          from: 'users.id',
-          to: 'users.id'
-        }
-      },
+      //  friends: {
+      //   relation: Model.HasManyRelation,
+      //   modelClass: __dirname + '/Friend',
+      //   join: {
+      //     from: 'users.id',
+      //     to: 'users.id'
+      //   }
+      // },
       //A user contributes many entries (to their own itineraires, and to those of others)
       entries: {
         relation: Model.HasManyRelation,

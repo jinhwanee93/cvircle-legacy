@@ -17,12 +17,14 @@ class PictureModal extends Component {
       formBody: "",
       address: '',
       contributorID: '',
+      pictures: []
     }
   //   // function binds
     this.close = this.close.bind(this);
     this.handleInputchange = this.handleInputchange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.getQueryParams = this.getQueryParams.bind(this);
+    this.addPic= this.addPic.bind(this);
 
     this.itinID = Number(this.getQueryParams('itinID'));
   }
@@ -31,6 +33,10 @@ class PictureModal extends Component {
     this.setState({showModal: false}, () => {
       this.props.resetFlag();
     });
+  }
+
+  addPic(picture){
+    this.setState({pictures : this.state.pictures.concat([picture])})
   }
   
   getQueryParams(param) {
@@ -43,29 +49,29 @@ class PictureModal extends Component {
     return(false);
   }
 
-  componentDidMount() {
-    if (this.props.isAuthenticated) {
-      console.log('asdf')
-      var userdata = {
-        firstName: this.props.profile.given_name,
-        lastName: this.props.profile.family_name,
-        fbID: this.props.profile.third_party_id,
-      }
-      axios.get(`http://localhost:3000/users`, {params : {userdata} })
-        .then((res) => {
-          console.log('asdfasdfasdfasdfasdf')
-          let tmp = res.data[0]["id"]
-          console.log('asd f')
-          console.log(res.data);
-          this.setState({
-            contributorID: tmp
-          })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.isAuthenticated) {
+  //     console.log('asdf')
+  //     var userdata = {
+  //       firstName: this.props.profile.given_name,
+  //       lastName: this.props.profile.family_name,
+  //       fbID: this.props.profile.third_party_id,
+  //     }
+  //     axios.get(`http://localhost:3000/users`, {params : {userdata} })
+  //       .then((res) => {
+  //         console.log('asdfasdfasdfasdfasdf')
+  //         let tmp = res.data[0]["id"]
+  //         console.log('asd f')
+  //         console.log(res.data);
+  //         this.setState({
+  //           contributorID: tmp
+  //         })
+  //       })
+  //       .catch((err) => {
+  //         console.log(err)
+  //       })
+  //   }
+  // }
 
   handleInputchange(e) {
     const name = e.target.name;
@@ -81,6 +87,23 @@ class PictureModal extends Component {
   // functions for location search bar
   onChange = (address) => {
     this.setState({ address })
+  }
+
+  componentDidMount (){
+    console.log("mounted")
+    var picdata = {
+        itinID: this.props.locationBeforeTransitions.query.itinID,
+      }
+    axios.get('/pictures', {params : {picdata}})
+        .then((result) => {
+            this.setState({
+                pictures: result.data
+            })
+          })
+        
+        .catch((err) => {
+          console.log(err)
+        })
   }
 
   handleFormSubmit = (event) => {
@@ -100,13 +123,13 @@ class PictureModal extends Component {
       <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
         <Tab eventKey={1} title="View Pictures">View Pictures
           <div>
-            <PictureCar/>
+            <PictureCar pictures={this.state.pictures}/>
             </div>
         </Tab>
 
         <Tab eventKey={2} title="Upload Pictures">
           <div>
-            <DropZone/>
+            <DropZone addPic = {this.addPic}/>
           </div>
           </Tab>
 
@@ -126,9 +149,11 @@ class PictureModal extends Component {
 
 const mapStateToProps = (state) => {
   const { isAuthenticated, profile, error } = state.auth
+  const { locationBeforeTransitions} = state.routing
   return {
     isAuthenticated,
-    profile
+    profile,
+    locationBeforeTransitions
   }
 }
 

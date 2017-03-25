@@ -61,7 +61,9 @@ class myDropzone extends Component {
                 url: response.body.secure_url
             })
             .then((response) => {
-              console.log(response)
+              console.log(response.data, "is this a obj?")
+              this.props.addPic(response.data)
+
             })
             .catch((err) => {
               if (err) {console.log(err)}

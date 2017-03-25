@@ -109,7 +109,7 @@ class HomePage extends Component {
               <div className="description">Welcome. Where will you be headed to next?</div>
             </div>
           </div>
-          <FriendsList />
+          <FriendsList myID={this.state.oid}/>
         </div>
         <div className="col-xs-7 itin-list">
             <Header as='h2' icon textAlign='center'>

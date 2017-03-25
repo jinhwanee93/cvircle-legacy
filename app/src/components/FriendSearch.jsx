@@ -10,7 +10,8 @@ class FriendSearch extends React.Component {
         value: '',
         showModal: false,
         searchedFriends: '',
-        addFriend: ''
+        addFriend: '',
+        you: ''
       }
       this.searchFriend = this.searchFriend.bind(this);
       this.handleChange = this.handleChange.bind(this);
@@ -55,28 +56,34 @@ toggleModal() {
 }
 
 addFriend(item) {
-    axios
-    .post('/friends', {
-        friendA: this.props.profile.third_party_id,
-        friendB: item.id
+    this.setState({
+        you: this.props.profile.third_party_id
     })
+    if(this.state.you === this.props.profile.third_party_id) {
+        alert("This is you!")
+    } else {
+        alert("Friend has been added!")
+    }
+        axios.post('/friends', {
+            friendA: this.props.profile.third_party_id,
+            friendB: item.id
+        })
 }
 
   render() {
-      console.log(this.props.profile.third_party_id, "this is profile?")
       return (
         <div>
         <Modal show={this.state.showModal} onHide={this.close}>
             <Modal.Header>Searched Friends</Modal.Header>
             <Modal.Body>
             <form>
-                {this.state.searchedFriends ? (this.state.searchedFriends.map(item => (<div style={{ cursor: 'pointer'}} onClick={() => {this.addFriend(item)}}>{item.firstName} {item.lastName}</div>))) : (<div>NOPE</div>)}
+                {this.state.searchedFriends ? (this.state.searchedFriends.map(item => (<div style={{ cursor: 'pointer'}} onClick={() => {this.addFriend(item)}}>{item.firstName} {item.lastName}</div>))) : (<div>Loading Friends</div>)}
             </form>
             </Modal.Body>
             <Modal.Footer>
             <Button 
                 className="btn btn-primary" 
-                onClick={this.close.bind(this)}>Close</Button>
+                onClick={this.close}>Close</Button>
             </Modal.Footer>
         </Modal>
             

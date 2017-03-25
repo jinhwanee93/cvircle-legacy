@@ -198,7 +198,11 @@ module.exports = (app) => {
   })
 
   app.post('/friends', (req, res, next) => {
-    let friend1 = parseInt(req.body.friendA)
+    User
+    .query()
+    .where('fbID', req.body.friendA)
+    .then(users => {
+    let friend1 = users[0].id
     let friend2 = parseInt(req.body.friendB)
     let whatIWant = {
       friendA: friend1,
@@ -211,6 +215,7 @@ module.exports = (app) => {
       .catch((err) => {
         next(err)
       })
+    })
   })
 
   app.get('/friendSearch', (req, res, next) => {

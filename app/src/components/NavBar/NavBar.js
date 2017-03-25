@@ -3,7 +3,6 @@ import { Navbar, NavbarHeader, FormGroup, FormControl, Button, Nav } from 'react
 import { Image, Search, Grid, Header } from 'semantic-ui-react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import faker from 'faker'
 import _ from 'lodash'
 // props passed down from redux store
 

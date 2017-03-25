@@ -5,6 +5,7 @@ import { showComments } from '../actions/chatindex.jsx';
 import { Card } from 'semantic-ui-react';
 import { Button, Comment } from 'semantic-ui-react';
 import { loadComments } from '../actions/chatindex.jsx';
+import { deleteComment } from '../actions/chatindex.jsx';
 
 class Post extends React.Component {
 componentWillMount(){
@@ -21,7 +22,8 @@ componentWillMount(){
        //console.log('item.conributorID', item.contributorID)
        //console.log('this.props.id', this.props.id);
         if (item.entryID === this.props.id){
-          return (<div className="ui comments inline"><div><p className="bold">{item.contributorID}</p>{ item.comment }</div></div>)
+          return (<p className="ui comments borders"><div><span className="left"><span className='bold'>{item.contributorID}</span>:<span>&nbsp;&nbsp;</span>{ item.comment }</span>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span onClick={() => deleteComment(item)} className="remove-btn glyphicon glyphicon-remove right"></span></div></p>)
       //return (<div><p>{item.contributorID}:{ item.comment }</p></div>) 
      } 
    })
@@ -42,7 +44,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ showComments, showNames, loadComments }, dispatch);
+  return bindActionCreators({ showComments, showNames, loadComments, deleteComment }, dispatch);
 }
 
 export default connect(mapStateToProps)(Post);

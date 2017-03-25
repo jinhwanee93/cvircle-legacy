@@ -213,7 +213,9 @@ newPictureAdded(){
                 {this.state.entries.length ?
                   (this.state.entries.map((entryData, i) => (
                     <div><ContributorEntry key={i} {...entryData} deleteEntry={this.deleteEntry} />
+                    <div className="space"></div>
                     <div className="box"><Post {...entryData}/></div>
+                    <div className="space"></div>
                     <div className="textbox"><Chat {...entryData} name={this.props.profile.nickname}/></div>
                     </div>))) :
                   <div style={{ 'margin': 'auto' }} className="text-center">No entries yet!</div>

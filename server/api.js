@@ -1,11 +1,11 @@
-const objection = require('objection');
-const User = require('./models/User');
-const Itinerary = require('./models/Itinerary');
-const Entry = require('./models/Entry');
-const Comment = require('./models/Comments');
-const Friend = require('./models/Friend');
+const objection = require('objection')
+const User = require('./models/User')
+const Itinerary = require('./models/Itinerary')
+const Entry = require('./models/Entry')
+const Comment = require('./models/Comments')
+const Friend = require('./models/Friend')
 const Cloudinary = require('cloudinary')
-const Pictures = require('./models/Pictures');
+const Pictures = require('./models/Pictures')
 
 // we should refactor this to DRY out the code and instead use
 // express.router and controllers modularly
@@ -198,9 +198,9 @@ module.exports = (app) => {
   app.get('/friends', (req, res, next) => {
     User
       .query()
-      .select('users.*', 'friends.friendA as fA', 'friends.friendB as fB', 'friendlist.firstName as ffn', 'friendlist.lastName as fln'  )
+      .select('users.*', 'friends.friendA as fA', 'friends.friendB as fB', 'friendlist.firstName as ffn', 'friendlist.lastName as fln')
       .join('friends', 'friends.friendA', 'users.id')
-      .join('users as friendlist', 'friends.friendB', 'friendlist.id' )
+      .join('users as friendlist', 'friends.friendB', 'friendlist.id')
       .where('users.id', req.query.userid)
       .then((list) => {
         res.send(list)
@@ -242,49 +242,46 @@ module.exports = (app) => {
       .catch(next)
   })
 
-  Cloudinary.config({ 
-  cloud_name: 'ddcrxxkge', 
-  api_key: '135915495998577', 
-  api_secret: 'yd8nXf1oai0DgVr8I4RgDVBpxl8' 
-});
+  Cloudinary.config({
+    cloud_name: 'ddcrxxkge',
+    api_key: '135915495998577',
+    api_secret: 'yd8nXf1oai0DgVr8I4RgDVBpxl8'
+  })
 
-app.get('/pictures', (req, res, next ) =>{
-  var parseID = JSON.parse(req.query.picdata).itinID
-  Pictures
+  app.get('/pictures', (req, res, next) => {
+    var parseID = JSON.parse(req.query.picdata).itinID
+    Pictures
       .query()
-      .where('picItinID', parseID )
+      .where('picItinID', parseID)
       // console.log(parseID, "this is ITINREQ")
       .then((pictures) => {
-        console.log(pictures, "show me pictures")
+        console.log(pictures, 'show me pictures')
         res.send(pictures)
       })
+  })
 
-})
-
-app.post('/pictures', (req, res, next) =>{
-      User
+  app.post('/pictures', (req, res, next) => {
+    User
       .query()
       .where('fbID', req.body.picUserID)
-      .then((users) => { 
+      .then((users) => {
         // console.log(users, "this is users")
         // console.log(users[0].id, "this is users id")
-  let asdf1 = parseInt(req.body.picItinID)
-  let asdf2 = users[0].id
-  let whatIWant = {
-    picItinID: asdf1,
-    picUserID: asdf2,
-    url: req.body.url
-  }
+        let asdf1 = parseInt(req.body.picItinID)
+        let asdf2 = users[0].id
+        let whatIWant = {
+          picItinID: asdf1,
+          picUserID: asdf2,
+          url: req.body.url
+        }
   // console.log('what is this? ', whatIWant)
-      Pictures
+        Pictures
       .query()
       .insertAndFetch(whatIWant)
-      .then((pictures) => { res.send(pictures)})
+      .then((pictures) => { res.send(pictures) })
       .catch((err) => {
-        console.log(err);
-      });
-
-})
-})
-};
-
+        console.log(err)
+      })
+      })
+  })
+}

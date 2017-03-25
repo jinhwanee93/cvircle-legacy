@@ -4,9 +4,15 @@ import { bindActionCreators } from 'redux';
 import { showComments } from '../actions/chatindex.jsx';
 import { Card } from 'semantic-ui-react';
 import { Button, Comment } from 'semantic-ui-react';
+import { loadComments } from '../actions/chatindex.jsx';
 
 class Post extends React.Component {
-  renderMessages() {
+componentWillMount(){
+  console.log('post 11')
+ loadComments();
+};
+
+  renderMessages(){
     //console.log('this.props.messages.comments', this.props.messages.comments)
     console.log('this.props.messages.names', this.props.messages.names);
     return this.props.messages.comments.map((item) => {
@@ -15,15 +21,16 @@ class Post extends React.Component {
        //console.log('item.conributorID', item.contributorID)
        //console.log('this.props.id', this.props.id);
         if (item.entryID === this.props.id){
-          return (<Comment.Text class="ui comments"><p>{item.contributorID}:{ item.comment }</p></Comment.Text>)
+          return (<div className="ui comments inline"><div><p className="bold">{item.contributorID}</p>{ item.comment }</div></div>)
       //return (<div><p>{item.contributorID}:{ item.comment }</p></div>) 
      } 
    })
   }
+  
   render (){
     //console.log('THIS PROPS MESSAGES', this.props.comments)
     return(
-      <Comment.Text>{this.renderMessages()}</Comment.Text>
+      <div className="commentbox">{this.renderMessages()}</div>
     )
   }
 }
@@ -35,7 +42,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ showComments, showNames }, dispatch);
+  return bindActionCreators({ showComments, showNames, loadComments }, dispatch);
 }
 
 export default connect(mapStateToProps)(Post);

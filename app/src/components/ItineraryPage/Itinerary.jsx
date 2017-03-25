@@ -204,8 +204,9 @@ class Itinerary extends Component {
                 {this.state.entries.length ?
                   (this.state.entries.map((entryData, i) => (
                     <div><ContributorEntry key={i} {...entryData} deleteEntry={this.deleteEntry} />
-                    <Chat {...entryData} name={this.props.profile.nickname}/>
-                    <Comment.Content class="ui comments"><Post {...entryData}/></Comment.Content></div>))) :
+                    <div className="box"><Post {...entryData}/></div>
+                    <div className="textbox"><Chat {...entryData} name={this.props.profile.nickname}/></div>
+                    </div>))) :
                   <div style={{ 'margin': 'auto' }} className="text-center">No entries yet!</div>
                 }
               </Card.Group>

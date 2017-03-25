@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { Card } from 'semantic-ui-react';
 import EditModal from '../components/EditModal.jsx';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import Chat from './Chat.jsx';
+import Post from './Post.jsx';
 
 class ContributorEntry extends Component {
   constructor(props) {
@@ -95,6 +97,8 @@ class ContributorEntry extends Component {
             <Card.Description>
               {this.state.body}
             </Card.Description>
+           
+           
           </Card.Content>
           <Card.Content extra>
             <span className="author">Contributed By: {this.state.author}</span>

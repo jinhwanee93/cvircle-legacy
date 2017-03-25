@@ -14,9 +14,23 @@ export function showNames(names) {
   }
 }
 
+export function loadComments() {
+   return (dispatch) => {
+     console.log('19 chatindex')
+    axios.get('/comments')
+    .then((results) => {
+      console.log('22')
+    console.log('results from GET', results)
+    dispatch(showComments(results.data));
+  })
+ }
+}
+
 export function postComment(data) {
   //console.log('result in chatindex', data);
   //console.log('data.id', data.entryID)
+  //event.preventDefault();
+  //event.stopPropagation();
   return (dispatch) => {
     axios.post('/comments', data)
     .then(() => {
@@ -29,6 +43,7 @@ export function postComment(data) {
     dispatch(showComments(results.data));
   })
  })
+
   // .then(()=> {
   //   axios.get('/usernames', { contributorID : data.contributorID})
   //   .then((results)=> {
@@ -37,12 +52,22 @@ export function postComment(data) {
   //     dispatch(showNames(item))
   //   })
   // })
-}
+  }
 
+/*export function loadComments() {
+  return (dispatch) => {
+    axios.get('/comments')
+    .then((results) => {
+    console.log('results from GET', results)
+    dispatch(showComments(results.data));
+   })
+  }
+ }*/
 
   //this was working before
   /*return {
     type: 'MESSAGE_SUBMITTED',
-    payload: [data]
-  };*/
-};
+    payload: [data]*/
+  
+
+  }

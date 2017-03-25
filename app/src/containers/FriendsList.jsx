@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FriendEntry from '../components/FriendEntry.jsx';
+import FriendSearch from '../components/FriendSearch.jsx';
 
 class FriendsList extends React.Component {
     constructor(props) {
@@ -13,7 +14,8 @@ render() {
     return(
         <div>
             <div>
-              <h1>Friends</h1>
+              <h3>Your Friends</h3>
+              <FriendSearch />
             </div>
             {this.state.arr.map(() => (<FriendEntry />))}
         </div>

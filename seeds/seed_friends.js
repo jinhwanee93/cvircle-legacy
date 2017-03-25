@@ -10,19 +10,9 @@ exports.seed = function (knex, Promise) {
       },
       {
         id: 2,
-        friendA: '2',
-        friendB: '1',
-      },
-      {
-        id: 3,
         friendA: '3',
         friendB: '4',
       },
-      {
-        id: 4,
-        friendA: '4',
-        friendB: '3',
-      }
       ]);
     })
 };

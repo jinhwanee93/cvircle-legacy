@@ -32,10 +32,11 @@ class Chat extends React.Component {
   render() {
     return (
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <input
+            <input 
               type="text" onChange={this.handleChange.bind(this)}
             />
-            <input type="submit" value="comment"/>
+            <input bsStyle="default"
+               className="entry btn-primary" type="submit" value="comment"/>
           </form>
     );
   }

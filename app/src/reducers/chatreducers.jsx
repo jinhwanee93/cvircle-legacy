@@ -15,7 +15,11 @@ export default function (state= initialState, action) {
     case 'NAMES':
       return Object.assign({}, state, {
         names:action.payload
-      })
+    })
+   case 'COMMENT_DELETED':
+    return Object.assign({}, state, {
+        
+    })
   }
   return state;
 }

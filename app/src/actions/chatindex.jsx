@@ -14,6 +14,12 @@ export function showNames(names) {
   }
 }
 
+export function xcomment(item){
+  return {
+    type: 'COMMENT_DELETED'
+  }
+}
+
 export function loadComments() {
    return (dispatch) => {
      console.log('19 chatindex')
@@ -25,6 +31,17 @@ export function loadComments() {
   })
  }
 }
+
+export function deleteComment(item){
+  console.log('item in chatindex', item)
+  return () => {
+    axios.delete('/comments', item)
+    .then((item) => {
+      console.log('item in delete', item)
+      //dispatch(xcomment(item))
+    })
+   }
+ }
 
 export function postComment(data) {
   //console.log('result in chatindex', data);
@@ -43,7 +60,7 @@ export function postComment(data) {
     dispatch(showComments(results.data));
   })
  })
-
+}
   // .then(()=> {
   //   axios.get('/usernames', { contributorID : data.contributorID})
   //   .then((results)=> {
@@ -52,7 +69,7 @@ export function postComment(data) {
   //     dispatch(showNames(item))
   //   })
   // })
-  }
+
 
 /*export function loadComments() {
   return (dispatch) => {

@@ -173,6 +173,17 @@ module.exports = (app) => {
       .catch(next)
   })
 
+    app.delete('/comments', (req, res, next) => {
+    console.log('req.query++++++++++++++++++++++++++++++++++++++++++++++++', req.query);
+    Comment
+      .query()
+      .skipUndefined()
+      //.where('id', req.query.id)
+      .deleteById(req.query.id)
+      .then((deleted) => { res.send(200, deleted); })
+      .catch(next);
+  })
+
   app.get('/usernames', (req, res, next) => {
     User
      .query()

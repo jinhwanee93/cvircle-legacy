@@ -34,8 +34,8 @@ exports.up = function(knex, Promise) {
     .createTable('comments', (table) => {
       table.increments('id').primary();
       table.string('comment', 255);
-      table.integer('contributorID').unsigned().references('id').inTable('users').onDelete('CASCADE');
-      table.integer('entryID').unsigned().references('id').inTable('entries').onDelete('CASCADE');
+      table.string('contributorID', 255);
+      table.integer('entryID').unsigned().references('id').inTable('entries').onDelete('CASCADE')
       table.timestamps(true);
     })
 
